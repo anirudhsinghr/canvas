@@ -60,7 +60,7 @@ canvas.addEventListener('mousedown', engage, false);
 canvas.addEventListener('mouseup', disengage, false);
 canvas.addEventListener('mousemove', putPoint, false);
 
-document.getElementById("reset").onclick = function () { canvas.width = canvas.width }
+document.getElementById("reset").onclick = function () { canvas.width = canvas.width; setRadius(10); }
 document.getElementById("save").onclick = function () {
 	window.location = canvas.toDataURL('image/png');
 };

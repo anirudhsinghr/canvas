@@ -98,7 +98,6 @@ function setColor (color) {
 }
 
 function setSwatch (e) {
-	console.log(e.target.style.backgroundColor);
 	var swatch = e.target;
 	setColor(swatch.style.backgroundColor);
 	swatch.className += " active";

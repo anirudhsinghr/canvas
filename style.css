@@ -23,7 +23,7 @@ canvas {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background-color: #2f2f2f;
+	background-color: #616069;
 	color: #FFF;
 	font-family: sans-serif;
 }
@@ -75,7 +75,7 @@ canvas {
 }
 
 #footer {
-	background-color: #2f2f2f;
+	background-color: #616069;
 	position: fixed;
 	width: 100%;
 	text-align: center;

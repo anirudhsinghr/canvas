@@ -12,6 +12,20 @@ function putPoint (e) {
 
 	e.preventDefault();
 	if (dragging) {
+		context.lineTo(e.pageX, e.pageY);
+		context.stroke();
+		context.beginPath();
+		context.arc(e.pageX, e.pageY, radius, 0, 2 * Math.PI);
+		context.fill();
+		context.beginPath();
+		context.moveTo(e.pageX, e.pageY);
+	}
+}
+
+function mobilePutPoint (e) {
+
+	e.preventDefault();
+	if (dragging) {
 		context.lineTo(e.touches[0].pageX, e.touches[0].pageY);
 		context.stroke();
 		context.beginPath();
@@ -23,14 +37,16 @@ function putPoint (e) {
 }
 
 function engage (e) {
-
 	e.preventDefault();
 	dragging = true;
-	putPoint(e);
+	if (e.type == "mousedown") {
+		putPoint(e);
+	} else if (e.type == "touchstart") {
+		mobilePutPoint(e);
+	}
 }
 
 function disengage (e) {
-
 	e.preventDefault();
 	dragging = false;
 	context.beginPath();
@@ -38,7 +54,7 @@ function disengage (e) {
 
 canvas.addEventListener('touchstart', engage, false);
 canvas.addEventListener('touchend', disengage, false);
-canvas.addEventListener('touchmove', putPoint, false);
+canvas.addEventListener('touchmove', mobilePutPoint, false);
 
 canvas.addEventListener('mousedown', engage, false);
 canvas.addEventListener('mouseup', disengage, false);

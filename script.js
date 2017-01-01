@@ -98,6 +98,7 @@ function setColor (color) {
 }
 
 function setSwatch (e) {
+	console.log(e.target.style.backgroundColor);
 	var swatch = e.target;
 	setColor(swatch.style.backgroundColor);
 	swatch.className += " active";
@@ -121,3 +122,10 @@ document.getElementById("reset").onclick = function () { canvas.width = canvas.w
 document.getElementById("save").onclick = function () {
 	window.location = canvas.toDataURL('image/png');
 };
+
+(function setBgColor () {
+	document.getElementById("black").style.backgroundColor = "black";
+	document.getElementById("red").style.backgroundColor = "red";
+	document.getElementById("green").style.backgroundColor = "green";
+	document.getElementById("blue").style.backgroundColor = "blue";
+})();

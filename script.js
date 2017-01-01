@@ -2,7 +2,6 @@ var canvas = document.getElementById('canvas');
 var context = canvas.getContext('2d');
 var radius = 10;
 var dragging = false;
-
 var minimumRadius = 0.5;
 var maximumRadius = 100;
 var defaultRadius = 10;
@@ -10,13 +9,11 @@ var interval = 2;
 var radiusSpan = document.getElementById("radiusValue");
 var decreaseRadius = document.getElementById("decreaseRadius");
 var increaseRadius = document.getElementById("increaseRadius");
-
 var swatches = document.getElementsByClassName("swatch");
 var add = document.getElementById("add");
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-
 context.lineWidth = radius * 2;
 
 function putPoint (e) {
@@ -63,18 +60,6 @@ function disengage (e) {
 	context.beginPath();
 }
 
-canvas.addEventListener('touchstart', engage, false);
-canvas.addEventListener('touchend', disengage, false);
-canvas.addEventListener('touchmove', mobilePutPoint, false);
-
-canvas.addEventListener('mousedown', engage, false);
-canvas.addEventListener('mouseup', disengage, false);
-canvas.addEventListener('mousemove', putPoint, false);
-
-document.getElementById("reset").onclick = function () { canvas.width = canvas.width; setRadius(10); }
-document.getElementById("save").onclick = function () {
-	window.location = canvas.toDataURL('image/png');
-};
 
 function setRadius (newRadius) {
 
@@ -123,3 +108,16 @@ add.addEventListener("click", function (e) {
 	var color = prompt("Enter Color Name or HexCode: ");
 	setColor(color);
 });
+
+canvas.addEventListener('touchstart', engage, false);
+canvas.addEventListener('touchend', disengage, false);
+canvas.addEventListener('touchmove', mobilePutPoint, false);
+
+canvas.addEventListener('mousedown', engage, false);
+canvas.addEventListener('mouseup', disengage, false);
+canvas.addEventListener('mousemove', putPoint, false);
+
+document.getElementById("reset").onclick = function () { canvas.width = canvas.width; setRadius(10); }
+document.getElementById("save").onclick = function () {
+	window.location = canvas.toDataURL('image/png');
+};

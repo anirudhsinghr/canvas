@@ -3,6 +3,17 @@ var context = canvas.getContext('2d');
 var radius = 10;
 var dragging = false;
 
+var minimumRadius = 0.5;
+var maximumRadius = 100;
+var defaultRadius = 10;
+var interval = 2;
+var radiusSpan = document.getElementById("radiusValue");
+var decreaseRadius = document.getElementById("decreaseRadius");
+var increaseRadius = document.getElementById("increaseRadius");
+
+var swatches = document.getElementsByClassName("swatch");
+var add = document.getElementById("add");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -64,3 +75,51 @@ document.getElementById("reset").onclick = function () { canvas.width = canvas.w
 document.getElementById("save").onclick = function () {
 	window.location = canvas.toDataURL('image/png');
 };
+
+function setRadius (newRadius) {
+
+	if (newRadius < minimumRadius) {
+		newRadius = minimumRadius;
+	} else if (newRadius > maximumRadius) {
+		newRadius = maximumRadius;
+	}
+
+	radius = newRadius;
+	context.lineWidth = radius * 2;
+	radiusSpan.innerHTML = radius;
+}
+
+decreaseRadius.addEventListener("click", function () {
+	setRadius(radius - interval);
+});
+
+increaseRadius.addEventListener("click", function () {
+	setRadius(radius + interval);
+});
+
+setRadius(defaultRadius);
+
+for (var i = 0, n = swatches.length; i < n; i++) {
+	swatches[i].addEventListener("click" ,setSwatch);
+}
+
+function setColor (color) {
+	context.fillStyle = color;
+	context.strokeStyle = color;
+	var active = document.getElementsByClassName("active")[0];
+	if (active) {
+		active.className = "swatch";
+	}
+}
+
+function setSwatch (e) {
+	var swatch = e.target;
+	setColor(swatch.style.backgroundColor);
+	swatch.className += " active";
+}
+
+
+add.addEventListener("click", function (e) {
+	var color = prompt("Enter Color Name or HexCode: ");
+	setColor(color);
+});
